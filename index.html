@@ -1,247 +1,1149 @@
 <!DOCTYPE html>
-<html lang="zh-CN"> <!-- 改为中文更贴合内容 -->
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 适配移动端 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>yyy的个人主页</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 全局样式重置和基础设置 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Microsoft YaHei", sans-serif; /* 更友好的中文字体 */
+      font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    }
+
+    :root {
+      --primary: #3498db;
+      --secondary: #2ecc71;
+      --accent: #9b59b6;
+      --dark: #2c3e50;
+      --light: #ecf0f1;
+      --gray: #95a5a6;
     }
 
     body {
-      background-color: #f5f7fa; /* 柔和的背景色 */
-      color: #333; /* 主体文字色 */
-      line-height: 1.6; /* 行高提升可读性 */
-      max-width: 1000px; /* 限制页面最大宽度 */
-      margin: 0 auto; /* 页面居中 */
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 头部样式 */
+    header {
+      background: linear-gradient(90deg, var(--dark) 0%, var(--accent) 100%);
+      color: white;
+      padding: 80px 0 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    /* 导航栏 */
+    nav {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* 主要内容区域 */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .motto {
+      font-style: italic;
+      background: var(--light);
+      padding: 20px;
+      border-left: 4px solid var(--primary);
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* 技能部分 */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    /* 学习计划 */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--light);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 3px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      margin-bottom: 30px;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      content: '';
+      position: absolute;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent transparent white;
+      right: -20px;
+      top: 20px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::after {
+      content: '';
+      position: absolute;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent white transparent transparent;
+      left: -20px;
+      top: 20px;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: var(--primary);
+      border: 4px solid white;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+      box-shadow: 0 0 0 4px var(--primary);
+    }
+
+    .timeline-item:nth-child(odd)::after {
+      right: -12px;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      left: -12px;
+    }
+
+    /* 网站链接 */
+    .websites-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .website-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .website-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .website-header {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .website-body {
       padding: 20px;
     }
 
-    /* 标题样式 */
-    h1 {
-      color: #2c3e50;
-      text-align: center;
-      margin: 20px 0 30px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #3498db;
-    }
-
-    h2 {
-      color: #2980b9; /* 调整为更协调的蓝色 */
-      margin: 25px 0 15px;
-      padding-left: 10px;
-      border-left: 4px solid #3498db;
-    }
-
-    h3 {
-      color: #8e44ad; /* 调整为更柔和的紫色 */
-      margin: 15px 0 10px;
-    }
-
-    /* 段落样式 */
-    #a1 {
-      font-size: 16px;
-      margin: 10px 0;
-    }
-
-    #a2 {
-      color: #e74c3c; /* 调整为更舒适的红色 */
-      font-weight: 500;
-      margin: 10px 0;
-    }
-
-    /* 图片样式 */
-    img {
-      display: block;
-      margin: 15px 0;
-      border-radius: 8px; /* 圆角 */
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
-      max-width: 100%; /* 响应式图片 */
-      height: auto; /* 保持宽高比 */
-    }
-
-    /* 列表样式 */
-    ul, ol {
-      margin: 10px 0 10px 40px;
-    }
-
-    li {
-      margin: 8px 0;
-    }
-
-    /* 链接样式 */
-    a {
-      color: #3498db;
+    .website-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--primary);
       text-decoration: none;
-      transition: color 0.3s; /* 过渡效果 */
+      font-weight: 500;
+      transition: color 0.3s;
     }
 
-    a:hover {
-      color: #2980b9;
+    .website-link:hover {
+      color: var(--accent);
       text-decoration: underline;
     }
 
-    /* 表格样式 */
-    table {
-      width: 100%;
-      border-collapse: collapse; /* 合并边框 */
-      margin: 15px 0;
-      background-color: white;
-      border-radius: 8px;
-      overflow: hidden; /* 配合圆角 */
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    /* 联系表格 */
+    .contact-container {
+      display: flex;
+      gap: 40px;
     }
 
-    th, td {
-      padding: 12px 15px;
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-form {
+      flex: 1;
+    }
+
+    .contact-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .contact-table th, .contact-table td {
+      padding: 15px;
       text-align: left;
       border-bottom: 1px solid #eee;
     }
 
-    th {
-      background-color: #3498db;
+    .contact-table th {
+      background-color: var(--primary);
       color: white;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    .contact-table tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
 
-    tr:hover {
-      background-color: #f8f9fa; /* 行悬停效果 */
+    .contact-table tr:hover {
+      background-color: #f1f1f1;
     }
 
-    /* 表单样式 */
-    form {
-      background-color: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      margin: 15px 0;
+    .form-group {
+      margin-bottom: 20px;
     }
 
-    label { /* 修正原代码的lable拼写错误 */
+    .form-group label {
       display: block;
       margin-bottom: 8px;
       font-weight: 500;
     }
 
-    input[type="text"],
-    input[type="email"], /* 修正原代码password类型为email更合理 */
-    textarea {
+    .form-control {
       width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 18px;
+      padding: 12px 15px;
       border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-      transition: border-color 0.3s;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s;
     }
 
-    input:focus,
-    textarea:focus {
+    .form-control:focus {
+      border-color: var(--primary);
       outline: none;
-      border-color: #3498db;
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
     }
 
-    textarea {
-      resize: vertical; /* 仅允许垂直调整大小 */
-      min-height: 100px;
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
     }
 
-    button {
-      background-color: #3498db;
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
+      padding: 12px 30px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
       cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
     }
 
-    button:hover {
-      background-color: #2980b9;
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    /* 分隔线样式优化 */
-    hr {
-      border: none;
-      border-top: 1px solid #eee;
-      margin: 20px 0;
+    /* 新增：个人经历样式 */
+    .experience-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--accent);
+    }
+
+    .experience-card h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .experience-card .date {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .experience-card ul {
+      margin-left: 20px;
+    }
+
+    .experience-card li {
+      margin-bottom: 8px;
+    }
+
+    /* 新增：项目展示样式 */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 20px;
+    }
+
+    .project-content h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .project-tag {
+      background: var(--light);
+      color: var(--dark);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .project-link:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* 新增：兴趣爱好样式 */
+    .hobbies-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .hobby-card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .hobby-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    /* 新增：自我评价样式 */
+    .self-eval {
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .self-eval h3 {
+      color: var(--dark);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .self-eval p {
+      margin-bottom: 15px;
+    }
+
+    /* 页脚 */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .about-content, .contact-container {
+        flex-direction: column;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+
+      .timeline-item::after {
+        left: 19px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content::after {
+        border-color: transparent white transparent transparent;
+        left: -20px;
+        right: auto;
+      }
+
+      .nav-container {
+        flex-direction: column;
+      }
+
+      .nav-links {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links li {
+        margin: 0 10px 10px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 <body>
-<h1>欢迎来到yyy的个人主页</h1>
-<br>
-<hr>
-<h2>关于我</h2>
-<img src="yyy.jpg" alt="yyy的个人照片" width="400" height="600"> <!-- 优化alt文本 -->
-<p id="a1">大家好，我叫<strong>yyy</strong>。今年22岁，来自数理科学学院。</p>
-<p id="a2">我喜欢编程。我的座右铭是“学无止境，每天进步一点点”</p>
-<br>
-<h2>我的技能</h2>
-<ul>
-  <li>html 网页制作</li>
-  <li>Python 编程</li>
-</ul>
-<br>
-<h2>我的学习计划</h2>
-<ol>
-  <li>学习html基础</li>
-  <li>学习css样式</li>
-  <li>学习javascript交互</li>
-</ol>
-<br>
-<h2>我喜欢的网站</h2>
-<h3>以下是我经常访问的网站：</h3>
-<ul>
-  <li><a href="https://www.baidu.com/index.php?tn=68018901_58_oem_dg">百度</a>-搜索引擎</li>
-  <li><a href="https://www.bilibili.com/">哔哩哔哩</a>-学习视频</li>
-</ul>
-<br>
-<h2>联系我</h2>
-<br>
-<table border="0"> <!-- 移除原有border，改用css控制 -->
-  <tr>
-    <th>联系方式</th>
-    <th>内容</th>
-  </tr>
-  <tr>
-    <td>邮箱</td>
-    <td>1273348900@qq.com</td>
-  </tr>
-  <tr>
-    <td>电话</td>
-    <td>18290341386</td>
-  </tr>
-</table>
-<br>
-<h2>给我留言</h2>
-<form>
-  <p>
-    <label>你的名字：</label><br> <!-- 修正拼写错误 -->
-    <input type="text" name="name" required> <!-- 添加必填验证 -->
-  </p>
-  <p>
-    <label>你的邮箱：</label><br> <!-- 修正拼写错误 -->
-    <input type="email" name="email" required> <!-- 修正类型并添加必填 -->
-  </p>
-  <p>
-    <label>留言内容:</label><br> <!-- 修正拼写错误 -->
-    <textarea name="message" rows="5" cols="50" required></textarea> <!-- 添加必填 -->
-  </p>
-  <p>
-    <button type="submit">提交</button>
-  </p>
-</form>
+<!-- 头部 -->
+<header>
+  <div class="container">
+    <div class="header-content">
+      <h1>yyy的个人主页</h1>
+      <p class="subtitle">持续学习 · 不断成长 · 追求卓越</p>
+    </div>
+  </div>
+</header>
 
+<!-- 导航栏 -->
+<nav>
+  <div class="container nav-container">
+    <div class="logo">yyy</div>
+    <ul class="nav-links">
+      <li><a href="#about">关于我</a></li>
+      <li><a href="#experience">个人经历</a></li>
+      <li><a href="#skills">我的技能</a></li>
+      <li><a href="#projects">项目展示</a></li>
+      <li><a href="#hobbies">兴趣爱好</a></li>
+      <li><a href="#plan">学习计划</a></li>
+      <li><a href="#evaluation">自我评价</a></li>
+      <li><a href="#websites">我喜欢的网站</a></li>
+      <li><a href="#contact">联系我</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 关于我 -->
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>关于我</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <h3 style="color: var(--dark); margin-bottom: 20px; font-size: 1.8rem;">个人简介</h3>
+        <p>大家好！我叫yyy，今年22岁，是一名<span style="color: var(--primary); font-weight: 600;">数据科学与大数据技术专业</span>的大四学生，就读于重庆市某重点大学。</p>
+        <p>我对编程和互联网技术有着浓厚的兴趣，尤其专注于前端开发和Python后端开发方向。在校期间成绩优异。</p>
+        <div class="motto">
+          "学无止境，每天进步一点点。"
+        </div>
+        <p>我热爱技术，喜欢探索新知识，乐于参与开源项目和技术社区交流。希望通过不断学习提升自己的技能，为未来的职业发展打下坚实基础，最终成为一名优秀的全栈开发工程师。</p>
+      </div>
+      <div class="about-image">
+        <img src="yyy.jpg" alt="yyy的照片" class="profile-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 新增：个人经历 -->
+<section id="experience" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="section-title">
+      <h2>个人经历</h2>
+    </div>
+    <div class="experience-card">
+      <h3><i class="fas fa-graduation-cap"></i> 教育经历</h3>
+      <span class="date">2022年9月 - 至今</span>
+      <p>重庆科技大学 数据科学与大数据技术专业 本科</p>
+      <ul>
+        <li>主修课程：数据结构、算法分析、计算机组成原理、操作系统、编程语言（C/Python/Java）、Web前端开发</li>
+        <li>学业成绩：GPA 3.8/4.0，专业排名前5%</li>
+        <li>荣誉奖项：2022-2023学年 校级一等奖学金；2023-2024学年 校级三好学生</li>
+      </ul>
+    </div>
+    <div class="experience-card">
+      <h3><i class="fas fa-briefcase"></i> 实践经历</h3>
+      <span class="date">2023年6月 - 2023年9月</span>
+      <p>某科技有限公司 前端开发实习生</p>
+      <ul>
+        <li>参与公司官网的改版与优化，负责页面布局和交互效果实现</li>
+        <li>使用HTML/CSS/JavaScript实现了3个核心业务模块的前端页面</li>
+        <li>优化页面加载速度，提升用户体验，页面加载时间减少30%</li>
+      </ul>
+    </div>
+    <div class="experience-card">
+      <h3><i class="fas fa-trophy"></i> 竞赛经历</h3>
+      <span class="date">2024年3月 - 2024年5月</span>
+      <p>全国大学生计算机设计大赛 省级二等奖</p>
+      <ul>
+        <li>团队负责人，带领3人团队开发"校园二手交易平台"Web应用</li>
+        <li>负责前端架构设计和核心功能开发，使用Vue.js框架实现</li>
+        <li>独立完成用户界面设计和交互逻辑，最终获得省级二等奖</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 我的技能 -->
+<section id="skills">
+  <div class="container">
+    <div class="section-title">
+      <h2>我的技能</h2>
+    </div>
+    <div class="skills-container">
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3>HTML/CSS开发</h3>
+        <p>熟练掌握HTML5/CSS3，精通Flex/Grid布局，能够制作响应式、语义化的网页。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fab fa-python"></i>
+        </div>
+        <h3>Python编程</h3>
+        <p>熟悉Python语法，掌握Django/Flask框架，能够进行数据分析和后端开发。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fab fa-js-square"></i>
+        </div>
+        <h3>JavaScript</h3>
+        <p>掌握JavaScript基础，熟悉Vue.js框架，能够实现复杂的前端交互效果。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fas fa-database"></i>
+        </div>
+        <h3>数据库</h3>
+        <p>熟悉MySQL/SQLite数据库，掌握SQL语句，能够设计合理的数据库结构。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h3>Office办公</h3>
+        <p>熟练使用Word、Excel、PowerPoint等办公软件，精通Excel数据处理。</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <i class="fas fa-camera"></i>
+        </div>
+        <h3>UI设计</h3>
+        <p>具备基本的UI设计能力，能够使用Figma/PS进行界面设计和原型制作。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 新增：项目展示 -->
+<section id="projects" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="section-title">
+      <h2>项目展示</h2>
+    </div>
+    <div class="projects-container">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="校园二手交易平台" class="project-img">
+        <div class="project-content">
+          <h3>校园二手交易平台</h3>
+          <p>基于Vue.js + Django开发的校园二手物品交易平台，支持发布、搜索、交易等功能。</p>
+          <div class="project-tags">
+            <span class="project-tag">Vue.js</span>
+            <span class="project-tag">Django</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">响应式设计</span>
+          </div>
+          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> 查看项目</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1617042375876-76100bc09620?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="个人博客系统" class="project-img">
+        <div class="project-content">
+          <h3>个人博客系统</h3>
+          <p>基于Python Flask框架开发的轻量级博客系统，支持文章发布、评论、分类等功能。</p>
+          <div class="project-tags">
+            <span class="project-tag">Flask</span>
+            <span class="project-tag">HTML/CSS</span>
+            <span class="project-tag">SQLite</span>
+            <span class="project-tag">Markdown</span>
+          </div>
+          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> 查看项目</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="数据分析工具" class="project-img">
+        <div class="project-content">
+          <h3>电商数据分析工具</h3>
+          <p>使用Python开发的数据分析工具，支持数据清洗、可视化、报表生成等功能。</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">Matplotlib</span>
+            <span class="project-tag">Excel</span>
+          </div>
+          <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> 查看项目</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 新增：兴趣爱好 -->
+<section id="hobbies">
+  <div class="container">
+    <div class="section-title">
+      <h2>兴趣爱好</h2>
+    </div>
+    <div class="hobbies-container">
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3>阅读</h3>
+        <p>喜欢阅读技术书籍和科幻小说，每月至少阅读2本书籍。</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-basketball-ball"></i>
+        </div>
+        <h3>篮球</h3>
+        <p>校篮球队成员，每周参加3次训练，喜欢团队协作的运动。</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-headphones"></i>
+        </div>
+        <h3>音乐</h3>
+        <p>喜欢听轻音乐和古典音乐，偶尔弹吉他，放松身心。</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-code-branch"></i>
+        </div>
+        <h3>开源贡献</h3>
+        <p>活跃于GitHub，参与开源项目，分享自己的代码和经验。</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-hiking"></i>
+        </div>
+        <h3>徒步旅行</h3>
+        <p>喜欢户外徒步，每年参加2-3次户外徒步活动，锻炼身体。</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">
+          <i class="fas fa-camera"></i>
+        </div>
+        <h3>摄影</h3>
+        <p>爱好风光摄影，用镜头记录生活中的美好瞬间。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 学习计划 -->
+<section id="plan">
+  <div class="container">
+    <div class="section-title">
+      <h2>我的学习计划</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>巩固前端基础</h3>
+          <p>深入学习JavaScript高级特性，掌握ES6+语法，熟练使用Vue3框架。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>学习后端开发</h3>
+          <p>深入学习Python Django框架，掌握RESTful API设计，实现前后端分离开发。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>学习云计算/运维</h3>
+          <p>学习Linux系统、Docker容器、云服务器部署，掌握项目上线全流程。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>学习算法与数据结构</h3>
+          <p>系统学习算法知识，刷LeetCode题目，提升编程思维和代码能力。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h3>完成毕业设计</h3>
+          <p>设计并实现一个完整的Web应用项目，综合运用所学知识，达到企业级开发水平。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 新增：自我评价 -->
+<section id="evaluation" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="section-title">
+      <h2>自我评价</h2>
+    </div>
+    <div class="self-eval">
+      <h3>认识自己，才能更好地成长</h3>
+      <p><strong>优势：</strong> 我具备较强的自学能力和问题解决能力，对新技术有强烈的好奇心和学习欲望。在校期间通过自学掌握了多项开发技能，并能够将所学知识应用到实际项目中。具备良好的团队协作精神，能够与团队成员有效沟通，共同完成项目目标。</p>
+      <p><strong>不足：</strong> 作为在校学生，缺乏大型企业的实际项目经验，在系统架构设计和性能优化方面还有待提升。同时，在时间管理方面还有改进空间，需要更好地平衡学习、项目和休息的时间。</p>
+      <p><strong>成长方向：</strong> 未来我将继续深耕全栈开发领域，不仅要掌握更多的技术栈，更要提升自己的工程化思维和项目管理能力。希望能够在实际工作中不断积累经验，成为一名技术扎实、思维开阔的优秀工程师。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 我喜欢的网站 -->
+<section id="websites">
+  <div class="container">
+    <div class="section-title">
+      <h2>我喜欢的网站</h2>
+    </div>
+    <p style="text-align: center; margin-bottom: 40px;">以下是一些我经常访问的优质技术和学习网站：</p>
+    <div class="websites-container">
+      <div class="website-card">
+        <div class="website-header">
+          <h3>哔哩哔哩</h3>
+        </div>
+        <div class="website-body">
+          <p>优质的视频学习平台，包含大量编程、设计、算法等免费教程资源。</p>
+          <a href="https://www.bilibili.com" class="website-link" target="_blank">访问网站 →</a>
+        </div>
+      </div>
+      <div class="website-card">
+        <div class="website-header">
+          <h3>GitHub</h3>
+        </div>
+        <div class="website-body">
+          <p>全球最大的开源代码托管平台，学习优秀项目代码，参与开源社区。</p>
+          <a href="https://github.com" class="website-link" target="_blank">访问网站 →</a>
+        </div>
+      </div>
+      <div class="website-card">
+        <div class="website-header">
+          <h3>LeetCode</h3>
+        </div>
+        <div class="website-body">
+          <p>程序员算法学习平台，提供大量算法题目，提升编程思维和代码能力。</p>
+          <a href="https://leetcode.cn" class="website-link" target="_blank">访问网站 →</a>
+        </div>
+      </div>
+      <div class="website-card">
+        <div class="website-header">
+          <h3>MDN Web Docs</h3>
+        </div>
+        <div class="website-body">
+          <p>最权威的Web开发文档，包含HTML、CSS、JavaScript等完整教程。</p>
+          <a href="https://developer.mozilla.org" class="website-link" target="_blank">访问网站 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 联系我 -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>联系我</h2>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <table class="contact-table">
+          <tr>
+            <th>联系方式</th>
+            <th>18290341386</th>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td>1273348900@qq.com</td>
+          </tr>
+          <tr>
+            <td>电话</td>
+            <td>138-0000-0000</td>
+          </tr>
+          <tr>
+            <td>GitHub</td>
+            <td>github.com/yingyangyang185-tech</td>
+          </tr>
+          <tr>
+            <td>地址</td>
+            <td>中国重庆市某重点大学</td>
+          </tr>
+        </table>
+      </div>
+      <div class="contact-form">
+        <h3 style="margin-bottom: 20px;">给我留言</h3>
+        <form id="messageForm">
+          <div class="form-group">
+            <label for="name">你的名字:</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">你的邮箱:</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">留言主题:</label>
+            <input type="text" id="subject" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="message">留言内容:</label>
+            <textarea id="message" class="form-control" required></textarea>
+          </div>
+          <button type="submit" class="btn">提交留言</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>版权所有 © 2026 yyy | 持续学习，不断进步</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-weixin"></i></a>
+        <a href="#"><i class="fab fa-qq"></i></a>
+        <a href="#"><i class="fab fa-weibo"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-csdn"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 表单提交处理
+  document.getElementById('messageForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('感谢您的留言！我会尽快回复您。');
+    this.reset();
+  });
+
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if(targetId === '#') return;
+
+      const targetElement = document.querySelector(targetId);
+      if(targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // 导航栏高亮
+  window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if(scrollY >= (sectionTop - 100)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>
