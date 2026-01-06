@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> <!-- 改为中文更贴合内容 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 适配移动端 -->
+  <title>yyy的个人主页</title>
+  <style>
+    /* 全局样式重置和基础设置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", sans-serif; /* 更友好的中文字体 */
+    }
+
+    body {
+      background-color: #f5f7fa; /* 柔和的背景色 */
+      color: #333; /* 主体文字色 */
+      line-height: 1.6; /* 行高提升可读性 */
+      max-width: 1000px; /* 限制页面最大宽度 */
+      margin: 0 auto; /* 页面居中 */
+      padding: 20px;
+    }
+
+    /* 标题样式 */
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin: 20px 0 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #3498db;
+    }
+
+    h2 {
+      color: #2980b9; /* 调整为更协调的蓝色 */
+      margin: 25px 0 15px;
+      padding-left: 10px;
+      border-left: 4px solid #3498db;
+    }
+
+    h3 {
+      color: #8e44ad; /* 调整为更柔和的紫色 */
+      margin: 15px 0 10px;
+    }
+
+    /* 段落样式 */
+    #a1 {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    #a2 {
+      color: #e74c3c; /* 调整为更舒适的红色 */
+      font-weight: 500;
+      margin: 10px 0;
+    }
+
+    /* 图片样式 */
+    img {
+      display: block;
+      margin: 15px 0;
+      border-radius: 8px; /* 圆角 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+      max-width: 100%; /* 响应式图片 */
+      height: auto; /* 保持宽高比 */
+    }
+
+    /* 列表样式 */
+    ul, ol {
+      margin: 10px 0 10px 40px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    /* 链接样式 */
+    a {
+      color: #3498db;
+      text-decoration: none;
+      transition: color 0.3s; /* 过渡效果 */
+    }
+
+    a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse; /* 合并边框 */
+      margin: 15px 0;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden; /* 配合圆角 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background-color: #f8f9fa; /* 行悬停效果 */
+    }
+
+    /* 表单样式 */
+    form {
+      background-color: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin: 15px 0;
+    }
+
+    label { /* 修正原代码的lable拼写错误 */
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="email"], /* 修正原代码password类型为email更合理 */
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+    }
+
+    textarea {
+      resize: vertical; /* 仅允许垂直调整大小 */
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    /* 分隔线样式优化 */
+    hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+<h1>欢迎来到yyy的个人主页</h1>
+<br>
+<hr>
+<h2>关于我</h2>
+<img src="yyy.jpg" alt="yyy的个人照片" width="400" height="600"> <!-- 优化alt文本 -->
+<p id="a1">大家好，我叫<strong>yyy</strong>。今年22岁，来自数理科学学院。</p>
+<p id="a2">我喜欢编程。我的座右铭是“学无止境，每天进步一点点”</p>
+<br>
+<h2>我的技能</h2>
+<ul>
+  <li>html 网页制作</li>
+  <li>Python 编程</li>
+</ul>
+<br>
+<h2>我的学习计划</h2>
+<ol>
+  <li>学习html基础</li>
+  <li>学习css样式</li>
+  <li>学习javascript交互</li>
+</ol>
+<br>
+<h2>我喜欢的网站</h2>
+<h3>以下是我经常访问的网站：</h3>
+<ul>
+  <li><a href="https://www.baidu.com/index.php?tn=68018901_58_oem_dg">百度</a>-搜索引擎</li>
+  <li><a href="https://www.bilibili.com/">哔哩哔哩</a>-学习视频</li>
+</ul>
+<br>
+<h2>联系我</h2>
+<br>
+<table border="0"> <!-- 移除原有border，改用css控制 -->
+  <tr>
+    <th>联系方式</th>
+    <th>内容</th>
+  </tr>
+  <tr>
+    <td>邮箱</td>
+    <td>1273348900@qq.com</td>
+  </tr>
+  <tr>
+    <td>电话</td>
+    <td>18290341386</td>
+  </tr>
+</table>
+<br>
+<h2>给我留言</h2>
+<form>
+  <p>
+    <label>你的名字：</label><br> <!-- 修正拼写错误 -->
+    <input type="text" name="name" required> <!-- 添加必填验证 -->
+  </p>
+  <p>
+    <label>你的邮箱：</label><br> <!-- 修正拼写错误 -->
+    <input type="email" name="email" required> <!-- 修正类型并添加必填 -->
+  </p>
+  <p>
+    <label>留言内容:</label><br> <!-- 修正拼写错误 -->
+    <textarea name="message" rows="5" cols="50" required></textarea> <!-- 添加必填 -->
+  </p>
+  <p>
+    <button type="submit">提交</button>
+  </p>
+</form>
+
+</body>
+</html>
